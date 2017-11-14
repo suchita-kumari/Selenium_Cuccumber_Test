@@ -59,18 +59,19 @@ The use of Extended Cucumber runner is similar to standard runner. Actually it i
 
 ```
 package stepDefintions;
+package stepDefintions;
 
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumber;
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
+import com.github.mkolisnyk.cucumber.runner.ExtendedTestNGRunner;
+
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
-@RunWith(ExtendedCucumber.class)
+
 @ExtendedCucumberOptions(jsonReport = "target/cucumber.json",
         detailedReport = true,
         detailedAggregatedReport = true,
         overviewReport = true,
-        //coverageReport = true,
+        coverageReport = true,
         jsonUsageReport = "target/cucumber-usage.json",
         usageReport = true,
         toPDF = true,
@@ -80,17 +81,21 @@ import org.junit.runner.RunWith;
 @CucumberOptions(plugin = { "html:target/cucumber-html-report",
         "json:target/cucumber.json", "pretty:target/cucumber-pretty.txt",
         "usage:target/cucumber-usage.json", "junit:target/cucumber-results.xml" },
-        features = { "classpath:features" },
+        features = { "./src/test/resources/features" },
         glue = { "info.seleniumcucumber.stepdefinitions" })
 
-public  class RunSmokeTest {
+public  class RunSmokeTest extends ExtendedTestNGRunner {
 }
+
+
+
+
 
 ```
 
 Test Report
 --------------
-Overview report cucumber-results-feature-overview.html can be investigated further generated under target 
+Overview report cucumber-results-feature-overview.html can be investigated further (generated under target). 
 Overview section contains aggregated information on run status per features/scenarios/steps. It’s some kind of results summary.
 
 Screenshot
